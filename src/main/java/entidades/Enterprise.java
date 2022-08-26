@@ -16,4 +16,16 @@ public class Enterprise {
     private List<Transaction> transactionList;
 
     public Enterprise(){}
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Enterprise(String name) {
+        this.name = name;
+    }
 }
