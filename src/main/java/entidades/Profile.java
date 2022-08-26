@@ -1,23 +1,19 @@
 package entidades;
-import  javax.persistence.*;
+import javax.persistence.*;
 import java.sql.Date;
 
-@Entity
-public class Transaction {
+public class Profile {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private String concept;
-    private float amount;
-    @ManyToOne
-    @JoinColumn(name="employee_id")
+    private String image;
+    private String phone;
+    @OneToOne(mappedBy = "profile")
     private Employee user;
-    @ManyToOne
-    @JoinColumn(name="enterprise_id")
-    private Enterprise enterprise;
     private Date createAt;
     private Date updatedAt;
-    public Transaction(){}
+
+    public Profile(){}
 
     public Long getId() {
         return id;
@@ -27,20 +23,20 @@ public class Transaction {
         this.id = id;
     }
 
-    public String getConcept() {
-        return concept;
+    public String getImage() {
+        return image;
     }
 
-    public void setConcept(String concept) {
-        this.concept = concept;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public float getAmount() {
-        return amount;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setAmount(float amount) {
-        this.amount = amount;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Employee getUser() {
@@ -49,14 +45,6 @@ public class Transaction {
 
     public void setUser(Employee user) {
         this.user = user;
-    }
-
-    public Enterprise getEnterprise() {
-        return enterprise;
-    }
-
-    public void setEnterprise(Enterprise enterprise) {
-        this.enterprise = enterprise;
     }
 
     public Date getCreateAt() {
