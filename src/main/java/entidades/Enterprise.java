@@ -1,6 +1,6 @@
 package entidades;
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 @Entity
 public class Enterprise {
@@ -89,5 +89,8 @@ public class Enterprise {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+    public Enterprise(String name) {
+        this.name = name;
     }
 }
