@@ -18,7 +18,6 @@ public class Enterprise {
     private Date createAt;
     private Date updatedAt;
     public Enterprise(){}
-
     public Long getId() {
         return id;
     }
