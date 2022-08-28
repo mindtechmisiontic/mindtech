@@ -65,6 +65,24 @@ public class ProyectoApplication {
 		mov1.setConcept("compra 1");
 		mov1.setUser(emp1);
 		System.out.println("Saliendo ..");
+
+		// Es posible crear una instancia de la clase "Empresa"
+		System.out.println("");
+		System.out.println("Creando instancia Enterprise...");
+		Enterprise empresa2 = new Enterprise(2L,"Coca cola","1234", "873 4553", "calle 2-03");
+		empresa2.toString();
+		System.out.println("Leyendo datos actuales...");
+		System.out.println(empresa2.toString());
+		//Es posible modificar los atributos
+		System.out.println("Modificando atributos...");
+		empresa2.setName("Pepsi");
+		empresa2.setDocument("4321");
+		empresa2.setPhone("984 5664");
+		empresa2.setAddress("Diag 3-02");
+		System.out.println("Leyendo atributos modificados....");
+		empresa2.toString();
+		System.out.println(empresa2.toString());
+		System.out.println("Saliendo");
 	}
 
 }

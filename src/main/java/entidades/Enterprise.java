@@ -18,6 +18,18 @@ public class Enterprise {
     private Date createAt;
     private Date updatedAt;
     public Enterprise(){}
+
+
+
+    public Enterprise(Long id, String name, String document,String phone, String address) {
+        this.id = id;
+        this.name=name;
+        this.document=document;
+        this.phone=phone;
+        this.address=address;
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -92,4 +104,16 @@ public class Enterprise {
     public Enterprise(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Enterprise{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", document='" + document + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
+
 }
