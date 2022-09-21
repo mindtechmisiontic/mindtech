@@ -1,5 +1,7 @@
-package Controladores;
+/*
+package controladores;
 
+import entidades.Transaction;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +23,13 @@ public class TaskControler {
 
     @GetMapping("/hello")
     public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return String.format("Hello %s!", name);
+        Transaction tr = new Transaction();
+        tr.setConcept("Concepto Uno");
+        return String.format("Hello %s!", tr.getConcept());
     }
 
 
-    /*
+
     @GetMapping("/tarea")
     public Employee Employee(@RequestParam(value = "email", defaultValue = "mundoooo") Long id, @RequestParam String name){
         System.out.println("Entrando");
@@ -33,6 +37,8 @@ public class TaskControler {
         emp.toString();
         return emp ;
     }
-*/
+
 
 }
+
+*/

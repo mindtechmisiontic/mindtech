@@ -1,21 +1,29 @@
 package mindtech.proyecto;
 
-import entidades.*;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.XADataSourceAutoConfiguration;
 
-import java.util.ArrayList;
-import java.util.List;
+import mindtech.proyecto.entidades.Employee;
+import mindtech.proyecto.entidades.Profile;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class, XADataSourceAutoConfiguration.class})
+@RestController
+//@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class, XADataSourceAutoConfiguration.class})
 public class ProyectoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoApplication.class, args);
+		Employee emp = new Employee();
+		Profile pr = new Profile(1l, "String image","312458785", "01/01/2022",   "10-20-2022",emp );
+		pr.toString();
+		//es posible crear una nueva instancia de la clase emmpleado
+		System.out.println("Ceando nueva instancia... ");
+		System.out.println(pr.toString());
+
+
+
+		/*
 		Enum_RoleName Er = null;
 		Er =  Er.Administrador;
 		//es posible crear una nueva instancia de la clase emmpleado
@@ -83,6 +91,8 @@ public class ProyectoApplication {
 		empresa2.toString();
 		System.out.println(empresa2.toString());
 		System.out.println("Saliendo");
+
+*/
 	}
 
 }

@@ -1,4 +1,5 @@
-package Controladores;
+/*
+package controladores;
 
 
 import org.springframework.boot.SpringApplication;
@@ -16,10 +17,12 @@ public class ControladorTransacciones {
     public static void main(String[] args) {
         SpringApplication.run(ControladorTransacciones.class, args);
     }
-
+/*
     @GetMapping("/enterprises/[id]/movements/")
-    public String hello(@RequestParam(value = "id", defaultValue = "World") String name) {
+    public String hello1(@RequestParam(value = "id", defaultValue = "World") String name) {
         return String.format("Hello %s!", name);
     }
-
+*/
+/*
 }
+*/
