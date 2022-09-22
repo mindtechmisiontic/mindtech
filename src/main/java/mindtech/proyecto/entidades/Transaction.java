@@ -21,9 +21,9 @@ public class Transaction {
 //    private Employee user;
 //    @Column(name = "enterprise")
     @Column(name = "createAt")
-    private Date createAt;
+    private String createAt;
     @Column(name = "updatedAt")
-    private Date updatedAt;
+    private String updatedAt;
 
     @ManyToOne()
     @JoinColumn(name = "employee_id")
@@ -32,7 +32,7 @@ public class Transaction {
     @JoinColumn(name="enterprise_id")
     private Enterprise enterprise;
 
-    public Transaction(Long id, String concept, float amount, Date createAt, Date updatedAt, Employee employee, Enterprise enterprise) {
+    public Transaction(Long id, String concept, float amount, String createAt, String updatedAt, Employee employee, Enterprise enterprise) {
         this.id = id;
         this.concept = concept;
         this.amount = amount;
@@ -93,19 +93,19 @@ public class Transaction {
 
 
 
-    public Date getCreateAt() {
+    public String getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(Date createAt) {
+    public void setCreateAt(String createAt) {
         this.createAt = createAt;
     }
 
-    public Date getUpdatedAt() {
+    public String getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
 }
