@@ -1,5 +1,7 @@
 package mindtech.proyecto.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 
@@ -13,34 +15,36 @@ public class Profile {
     private String image;
     @Column
     private String phone;
+
+    //@JsonIgnore
+    //@JoinColumn(name="usuario")
+    @OneToOne()
+    private Usuario usuario;
+
     @Column
     private String createAt;
     @Column
     private String updatedAt;
-    //@JsonIgnore
+    @JsonIgnore
     @OneToOne(mappedBy = "profile" )
     private Employee employee;
 
-    public Profile(Long id, String image, String phone, String createAt, String updatedAt, Employee employee) {
+    public Profile(Long id, String image, String phone, Usuario usuario, String createAt, String updatedAt, Employee employee) {
         this.id = id;
         this.image = image;
         this.phone = phone;
+        this.usuario = usuario;
         this.createAt = createAt;
         this.updatedAt = updatedAt;
         this.employee = employee;
-
     }
 
-    @Override
-    public String toString() {
-        return "Profile{" +
-                "id=" + id +
-                ", image='" + image + '\'' +
-                ", phone='" + phone + '\'' +
-                ", createAt='" + createAt + '\'' +
-                ", updatedAt='" + updatedAt + '\'' +
-                ", employee=" + employee +
-                '}';
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Profile(){

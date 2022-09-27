@@ -1,9 +1,12 @@
 
 package mindtech.proyecto.entidades;
-//import mindtech.proyecto.entidades.Enterprise;
-//import mindtech.proyecto.entidades.Transaction;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,40 +27,49 @@ public class Employee {
     @Enumerated(value = EnumType.STRING)
     private Enum_RoleName role;
 
-    @JoinColumn(name="Profile_id")
+    @JoinColumn(name="profile_id")
     @OneToOne()
     private Profile profile;
 
-//    @ManyToOne
-//    @JoinColumn(name="enterprise_id")
-//    private Enterprise enterprise;
+    @JsonIgnore
 
-    @OneToMany(mappedBy = "employee")
-    private List<Transaction> Transaction;
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "employee")
+    //@JoinColumn(name="transaction_id")
+    private List<Transaction> transaction;
 
-    public Employee(){
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", rol='" + rol + '\'' +
+                ", role=" + role +
+                ", profile=" + profile +
+                ", transaction=" + transaction +
+                '}';
     }
 
-    public Employee(Long id, String email, String name, String rol, Enum_RoleName role, Profile profile, List<mindtech.proyecto.entidades.Transaction> transaction) {
+    public Employee(Long id, String email, String name, String rol, Enum_RoleName role, Profile profile, List<Transaction> transaction) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.rol = rol;
         this.role = role;
         this.profile = profile;
-        Transaction = transaction;
+        this.transaction = transaction;
     }
 
-    public List<mindtech.proyecto.entidades.Transaction> getTransaction() {
-        return Transaction;
+    public Employee(){
     }
 
-    public void setTransaction(List<mindtech.proyecto.entidades.Transaction> transaction) {
-        Transaction = transaction;
+    public List<Transaction> getTransaction() {
+        return transaction;
     }
 
-
-
+    public void setTransaction(List<Transaction> transaction) {
+        this.transaction = transaction;
+    }
 
     public Profile getProfile() {
         return profile;
@@ -106,22 +118,6 @@ public class Employee {
     public void setEmail(String email) {
         this.email = email;
     }
-/*
-    public Enterprise getEnterprise() {
-        return enterprise;
-    }
 
-    public void setEnterprise(Enterprise enterprise) {
-        this.enterprise = enterprise;
-    }
-
-    public List<Transaction> getTransactionList() {
-        return transactionList;
-    }
-
-    public void setTransactionList(List<Transaction> transactionList) {
-        this.transactionList = transactionList;
-    }
-*/
 }
 

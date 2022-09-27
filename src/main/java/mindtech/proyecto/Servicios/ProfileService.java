@@ -29,7 +29,7 @@ public class ProfileService {
         return profileRepository.findAll();
     }
 
-    public Profile getProfile(Long id) throws Exception {
+    public Profile getProfile(String id) throws Exception {
         Optional<Profile> ProfileOptional = profileRepository.findById(id);
         if(ProfileOptional.isPresent()){
             return ProfileOptional.get();

@@ -27,11 +27,10 @@ public class ProfileControlador {
     @Autowired
     private ProfileService profileService;
 
-/*
     public ProfileService getProfileService() {
         return profileService;
     }
-*/
+
     public void setProfileService(ProfileService profileService) {
         this.profileService = profileService;
     }

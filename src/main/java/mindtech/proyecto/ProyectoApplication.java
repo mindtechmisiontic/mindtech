@@ -3,6 +3,7 @@ package mindtech.proyecto;
 
 import mindtech.proyecto.entidades.Employee;
 import mindtech.proyecto.entidades.Profile;
+import mindtech.proyecto.entidades.Usuario;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +16,8 @@ public class ProyectoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoApplication.class, args);
 		Employee emp = new Employee();
-		Profile pr = new Profile(1l, "String image","312458785", "01/01/2022",   "10-20-2022",emp );
+		Usuario us = new Usuario();
+		Profile pr = new Profile(1l, "String image","312458785", us,"01/01/2022",   "10-20-2022",emp );
 		pr.toString();
 		//es posible crear una nueva instancia de la clase emmpleado
 		System.out.println("Ceando nueva instancia... ");

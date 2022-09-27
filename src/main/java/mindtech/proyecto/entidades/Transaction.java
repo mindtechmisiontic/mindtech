@@ -6,7 +6,7 @@ import  javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name="transaccion")
+@Table(name="transaction")
 public class Transaction {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -26,11 +26,29 @@ public class Transaction {
     private String updatedAt;
 
     @ManyToOne()
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "employee_id",referencedColumnName = "id", insertable = true, updatable = true)
     private Employee employee;
-    @ManyToOne
-    @JoinColumn(name="enterprise_id")
+
+    @ManyToOne()
+    @JoinColumn(name = "enterprise_id",referencedColumnName = "id", insertable = true, updatable = true)
     private Enterprise enterprise;
+
+    public Transaction(){
+
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", concept='" + concept + '\'' +
+                ", amount=" + amount +
+                ", createAt='" + createAt + '\'' +
+                ", updatedAt='" + updatedAt + '\'' +
+                ", employee=" + employee +
+                ", enterprise=" + enterprise +
+                '}';
+    }
 
     public Transaction(Long id, String concept, float amount, String createAt, String updatedAt, Employee employee, Enterprise enterprise) {
         this.id = id;
@@ -42,23 +60,6 @@ public class Transaction {
         this.enterprise = enterprise;
     }
 
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "id=" + id +
-                ", concept='" + concept + '\'' +
-                ", amount=" + amount +
-                ", createAt=" + createAt +
-                ", updatedAt=" + updatedAt +
-                ", employee=" + employee +
-                ", enterprise=" + enterprise +
-                '}';
-    }
-
-    public Transaction(){
-
-    }
-
     public Employee getEmployee() {
         return employee;
     }
@@ -66,6 +67,16 @@ public class Transaction {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
+    }
+
+
 
     public Long getId() {
         return id;

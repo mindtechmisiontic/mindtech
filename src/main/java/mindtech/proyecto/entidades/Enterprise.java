@@ -1,6 +1,9 @@
 
 package mindtech.proyecto.entidades;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 @Table(name ="enterprise")
@@ -16,25 +19,14 @@ public class Enterprise {
     private String phone;
     @Column
     private String address;
-//    @OneToMany(mappedBy = "enterprise")
-//    private List<Employee> users;
     @Column
     private String createAt;
     @Column
     private String updatedAt;
-    @OneToMany(mappedBy = "enterprise")
-    private List<Transaction> Transaction;
-
-
-    public Enterprise(Long id, String name, String document, String phone, String address, String createAt, String updatedAt, List<mindtech.proyecto.entidades.Transaction> transaction) {
-        this.id = id;
-        this.name = name;
-        this.document = document;
-        this.phone = phone;
-        this.address = address;
-        this.createAt = createAt;
-        this.updatedAt = updatedAt;
-        Transaction = transaction;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "enterprise")
+    private List<Transaction> transaction;
+    public Enterprise() {
     }
 
     @Override
@@ -47,22 +39,28 @@ public class Enterprise {
                 ", address='" + address + '\'' +
                 ", createAt='" + createAt + '\'' +
                 ", updatedAt='" + updatedAt + '\'' +
-                ", Transaction=" + Transaction +
+                ", transaction=" + transaction +
                 '}';
     }
 
-    public Enterprise(){
-
+    public Enterprise(Long id, String name, String document, String phone, String address, String createAt, String updatedAt, List<Transaction> transaction) {
+        this.id = id;
+        this.name = name;
+        this.document = document;
+        this.phone = phone;
+        this.address = address;
+        this.createAt = createAt;
+        this.updatedAt = updatedAt;
+        this.transaction = transaction;
     }
 
-    public List<mindtech.proyecto.entidades.Transaction> getTransaction() {
-        return Transaction;
+    public List<Transaction> getTransaction() {
+        return transaction;
     }
 
-    public void setTransaction(List<mindtech.proyecto.entidades.Transaction> transaction) {
-        Transaction = transaction;
+    public void setTransaction(List<Transaction> transaction) {
+        this.transaction = transaction;
     }
-
     public Long getId() {
         return id;
     }
