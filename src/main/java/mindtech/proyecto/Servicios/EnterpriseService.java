@@ -4,6 +4,7 @@ package mindtech.proyecto.Servicios;
 import mindtech.proyecto.entidades.Employee;
 import mindtech.proyecto.entidades.Enterprise;
 import mindtech.proyecto.repositorio.EnterpriseRepository;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,28 +20,59 @@ public class EnterpriseService {
     public EnterpriseService(EnterpriseRepository enterpriseRepository){
         this.enterpriseRepository= enterpriseRepository;
     }
-    public List<Enterprise>  getEnterprises() {
-        return enterpriseRepository.findAll();
-    }
 
     public EnterpriseService() {
     }
 
-    public Enterprise getEmployee(String id) throws Exception {
-        Optional<Enterprise> employeeOptional = enterpriseRepository.findById(id);
-        if(employeeOptional.isPresent()){
-            return employeeOptional.get();
+
+    public List<Enterprise>  getEnterprises() {
+        return enterpriseRepository.findAll();
+    }
+
+
+
+    public Enterprise getEnterprise(Long id) throws Exception {
+        Optional<Enterprise> enterpriseOptional = enterpriseRepository.findById(id);
+        if(enterpriseOptional.isPresent()){
+            return enterpriseOptional.get();
         }else{
             throw new Exception("Enterprise No Existe");
         }
     }
 
-    public Enterprise saveEnterprise(Enterprise enterprise_param){
+
+
+    public Enterprise putEnterprise(Enterprise enterprise_param){
+
         return enterpriseRepository.save(enterprise_param);
     }
 
-    public Enterprise putEnterprise(Enterprise enterprise_param){
-        return enterpriseRepository.save(enterprise_param);
+    public Enterprise patchEnterprise(Enterprise enterprise_param, Long id) throws Exception
+    {
+        try{
+            Enterprise enterprisePatch = getEnterprise(id);
+            if(enterprise_param.getName()!=null){
+                enterprisePatch.setName(enterprise_param.getName());
+            }
+            if(enterprise_param.getDocument()!=null){
+                enterprisePatch.setDocument(enterprise_param.getDocument());
+            }
+            if(enterprise_param.getPhone()!=null){
+                enterprisePatch.setPhone(enterprise_param.getPhone());
+            }
+            if(enterprise_param.getAddress()!=null){
+                enterprisePatch.setAddress(enterprise_param.getAddress());
+            }
+            return putEnterprise(enterprisePatch);
+        }catch (Exception e){
+            throw new Exception("No se actualizo, no existe");
+        }
+    }
+
+    public String deleteEnterprise(Long id)
+    {
+        enterpriseRepository.deleteById(id);
+        return "Empresa Eliminada";
     }
 /*
     public Employee patchEmployee(Employee employee_param, String id) throws Exception {

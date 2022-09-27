@@ -3,6 +3,8 @@ package mindtech.proyecto.entidades;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -32,7 +34,7 @@ public class Employee {
     private Profile profile;
 
     @JsonIgnore
-
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "employee")
     //@JoinColumn(name="transaction_id")
     private List<Transaction> transaction;

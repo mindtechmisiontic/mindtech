@@ -2,6 +2,9 @@
 package mindtech.proyecto.entidades;
 
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import  javax.persistence.*;
 import java.sql.Date;
 
@@ -26,6 +29,7 @@ public class Transaction {
     private String updatedAt;
 
     @ManyToOne()
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "employee_id",referencedColumnName = "id", insertable = true, updatable = true)
     private Employee employee;
 

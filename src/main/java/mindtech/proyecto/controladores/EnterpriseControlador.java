@@ -7,10 +7,7 @@ import mindtech.proyecto.entidades.MensajeResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +21,11 @@ public class EnterpriseControlador {
 
     @Autowired
     private EnterpriseService enterpriseService;
+    public EnterpriseControlador(EnterpriseService enterpriseService) {
+        this.enterpriseService = enterpriseService;
+    }
 
+    /*
     public EnterpriseService getEnterpriseService() {
         return enterpriseService;
     }
@@ -32,15 +33,15 @@ public class EnterpriseControlador {
     public void setEnterpriseService(EnterpriseService enterpriseService) {
         this.enterpriseService = enterpriseService;
     }
-
-    public EnterpriseControlador(EnterpriseService enterpriseService) {
-        this.enterpriseService = enterpriseService;
+*/  @PostMapping("/enterprises")
+    public ResponseEntity<MensajeResponse> putEnterprise(@RequestBody Enterprise enterprise){
+        return new ResponseEntity<>(
+                new MensajeResponse("Enterprise Creado Exitosamente",
+                        enterpriseService.putEnterprise(enterprise))
+                ,HttpStatus.OK);
     }
 
-    public EnterpriseControlador() {
-    }
-
-    @GetMapping("/Enterprise")
+    @GetMapping("/enterprises")
     public ResponseEntity<List<Enterprise>> getEnterprises(){
         return new ResponseEntity<List<Enterprise>>(
                 enterpriseService.getEnterprises(),
@@ -48,21 +49,41 @@ public class EnterpriseControlador {
         );
     }
 
-    @PostMapping("/Enterprise")
-    public ResponseEntity<MensajeResponse> postEmploye(@RequestBody Enterprise enterprise){
-        return new ResponseEntity<>(
-                new MensajeResponse("Enterprise Creado Exitosamente",
-                        enterpriseService.saveEnterprise(enterprise))
-                ,HttpStatus.OK);
-    }
-/*
-    @GetMapping("/Employee/{id}")
-    public ResponseEntity<Employee>  getEmploye(@PathVariable String id){
-        try {
-            System.out.println("Metodo Url");
-        } catch (Exception e) {
+    @GetMapping ("enterprises/{id}")
+    public ResponseEntity<Object> getEnterprise(@PathVariable Long id)
+    {
+        try{
+            System.out.println("Metodo URL");
+            Enterprise enterprise=enterpriseService.getEnterprise(id);
+            return  new ResponseEntity<>(enterprise, HttpStatus.OK);
+
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-*/
+
+    @PatchMapping("enterprises/{id}")
+    public ResponseEntity<MensajeResponse> patchEnterprise(@RequestBody Enterprise enterprise,@PathVariable Long id){
+        try{
+            System.out.println("Metodo Entrerprises/{id}/patch");
+            return new ResponseEntity<>(new MensajeResponse("Actualizacion Exitosa",enterpriseService.patchEnterprise(enterprise, id)),HttpStatus.OK);
+            }
+        catch (Exception e)
+        {
+            return  new ResponseEntity<>(new MensajeResponse(e.getMessage(),null),HttpStatus.OK);
+        }
+    }
+    @DeleteMapping("enterprises/{id}")
+    public ResponseEntity<MensajeResponse> deleteEnterprise(@RequestBody Enterprise enterprise, @PathVariable Long id)
+    {
+        return new ResponseEntity<>(new MensajeResponse(enterpriseService.deleteEnterprise(id), null),HttpStatus.OK);
+
+    }
+    public EnterpriseControlador() {
+    }
+
+
+
 
 }
